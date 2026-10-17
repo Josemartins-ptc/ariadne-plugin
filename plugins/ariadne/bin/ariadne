@@ -1,0 +1,47 @@
+#!/bin/sh
+# Launcher: runs the platform binary bin/<os>-<arch>/ariadne with the same arguments.
+# Every failure prints one line on stderr and exits FAILURE_EXIT, never 2: Claude Code
+# reads exit 2 from a hook as "block the agent".
+set -u
+
+BINARY_NAME="ariadne"
+PLATFORM_FILE="host-platform.sh"
+FAILURE_EXIT=1
+VERSION_PREFIX="ariadne "
+
+fail() {
+    echo "ariadne: $1" >&2
+    exit "$FAILURE_EXIT"
+}
+
+CDPATH=
+export CDPATH
+
+# Follow symlinks so the plugin root is found wherever the launcher is invoked from.
+script=$0
+while [ -L "$script" ]; do
+    target=$(readlink "$script") || fail "cannot read the link $script"
+    case "$target" in
+        /*) script=$target ;;
+        *)
+            link_dir=$(dirname "$script") || fail "cannot locate $script"
+            script=$link_dir/$target
+            ;;
+    esac
+done
+script_dir=$(dirname "$script") || fail "cannot locate $script"
+bin_dir=$(cd "$script_dir" && pwd -P) || fail "cannot enter $script_dir"
+
+[ -r "$bin_dir/$PLATFORM_FILE" ] || fail "missing $bin_dir/$PLATFORM_FILE"
+. "$bin_dir/$PLATFORM_FILE"
+platform=$(host_platform) || exit "$FAILURE_EXIT"
+
+binary="$bin_dir/$platform/$BINARY_NAME"
+[ -x "$binary" ] || fail "binary not found at $binary: Ariadne ships macOS and Linux binaries for arm64 and x86_64 (from a source checkout, run scripts/build-plugin.sh)"
+# A wrong-architecture or corrupt binary must not be run as a shell script.
+version=$("$binary" --version 2>/dev/null </dev/null) || fail "cannot run $binary"
+case "$version" in
+    "$VERSION_PREFIX"*) ;;
+    *) fail "cannot run $binary" ;;
+esac
+exec "$binary" "$@"

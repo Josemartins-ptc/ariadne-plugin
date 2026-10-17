@@ -1,0 +1,13 @@
+{
+  "name": "ariadne",
+  "version": "0.1.0",
+  "description": "Deterministic complexity guard: keeps the agent refactoring until changed functions meet their complexity, length, parameter and nesting limits.",
+  "author": {
+    "name": "José Martins",
+    "url": "https://github.com/Josemartins-ptc"
+  },
+  "homepage": "https://github.com/Josemartins-ptc/ariadne-plugin",
+  "repository": "https://github.com/Josemartins-ptc/ariadne-plugin",
+  "license": "Apache-2.0",
+  "keywords": ["complexity", "cognitive-complexity", "code-quality", "refactoring", "go", "rust", "typescript", "javascript"]
+}

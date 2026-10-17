@@ -1,0 +1,44 @@
+# Ariadne config for a Rust project (single crate or workspace).
+# Copy it to the project root as `.ariadne.toml`, or run /ariadne:init in Claude Code,
+# which writes a file like this for you. Every key is optional.
+# Limits left out here keep their built-in values: cyclomatic 10, cognitive 15
+# (Go: cyclomatic 15), length 80, parameters 7, nesting 4; tests get length 150.
+# Each line below says whether it changes a default.
+
+[languages.rust]             # Rust only, so other languages keep their defaults
+cyclomatic = 10              # same as the default; a function fails above this
+cognitive = 15               # same as the default
+length = 80                  # same as the default; lines per function
+parameters = 7               # same as the default; `self` does not count
+nesting = 4                  # same as the default; deepest if / loop / match
+
+# Test functions (#[cfg(test)] modules, #[test] fns, tests/ folders) get at least 150
+# lines by default. Setting it yourself fixes the value, even if you later raise `length`:
+# [test_code]
+# length = 150
+
+[languages.rust.rules]
+count_try_operator = false   # default; true makes each `?` add 1 to cyclomatic
+
+[lint]
+# Default: `cargo clippy --all-targets`, run in each changed crate (blocks on errors only).
+# Changed: also block on clippy warnings.
+command = "cargo clippy --all-targets -- -D warnings"
+timeout_seconds = 300        # default
+
+[tests]
+# Default: `cargo test`, run in each changed crate. "" turns the stage off.
+command = "cargo test"
+# Changed (default 600): a first `cargo test` with a cold build cache is slow.
+timeout_seconds = 900
+
+[hooks]
+mode = "changed"             # default; changed | ratchet | all
+max_stop_iterations = 5      # default
+max_workspace_repos = 5      # default; 1 to 10, read from a session folder outside git
+# Changed: `**/target/**` instead of `target/**`, so the build output of every crate
+# in a workspace is skipped. A list replaces the built-in one, so the other built-in
+# entries are restated. Caution: it also skips a source folder named `target`
+# (e.g. `src/target/mod.rs`); use `target/**` plus one `crates/x/target/**` per
+# crate instead if you have one.
+exclude = ["vendor/**", "node_modules/**", "**/generated/**", "**/*.pb.go", "**/target/**"]

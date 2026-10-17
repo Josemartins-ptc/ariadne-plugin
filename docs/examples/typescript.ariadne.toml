@@ -1,0 +1,79 @@
+# Ariadne config for a TypeScript project (one package or a monorepo).
+# Copy it to the project root as `.ariadne.toml`, or run /ariadne:init in Claude Code,
+# which writes a file like this for you. Every key is optional.
+# Limits left out here keep their built-in values: cyclomatic 10, cognitive 15
+# (Go: cyclomatic 15), length 80 (.tsx: 120), parameters 7, nesting 4; tests get
+# length 150. Each line below says whether it changes a default.
+
+[languages.typescript]       # .ts, .mts, .cts and .tsx files
+cyclomatic = 10              # same as the default; a function fails above this
+cognitive = 15               # same as the default
+length = 80                  # same as the default; lines per function
+parameters = 7               # same as the default; `this:` does not count
+nesting = 4                  # same as the default; deepest if / loop / switch / catch
+
+[languages.typescript.tsx]   # .tsx files only, above [languages.typescript]
+# Same as the default. Keep it whenever you set `length` above or under [thresholds]:
+# without it, that length applies to .tsx files too.
+length = 120
+
+# Test files (cart.test.ts, api.spec.ts, Button.cy.tsx, __tests__/ ...) get at least
+# 150 lines by default. Setting it yourself fixes the value, even if you later raise
+# `length`:
+# [test_code]
+# length = 150
+
+[languages.typescript.rules]
+count_nullish_coalescing = true   # default; false: `??` and `??=` add nothing
+count_optional_chaining = false   # default; true: each `?.` adds 1 to cyclomatic
+
+# Lint and tests: TypeScript has default commands, so these sections can be left out.
+# Each package (apps/web, apps/api, ...) runs its own, with no configuration:
+#   tests: npm run test:unit (else test:unit:ci, unit), else npm test; never test:e2e.
+#   lint:  npm run type-check (else typecheck, check-types), else the installed
+#          node_modules/.bin/tsc --noEmit --skipLibCheck (one run per reference for a
+#          solution-style tsconfig.json such as the Vite template's). Never `lint`.
+# The defaults need the package's own dependencies installed: every name in its
+# package.json's dependencies and devDependencies in a node_modules, in the package or
+# any folder above it (as Node looks; any node_modules when it declares none). A
+# subagent worktree inside the checkout uses the checkout's node_modules when all the
+# dependencies are hoisted there (npm, Yarn); with pnpm, install in the worktree or set
+# the commands. Composite references not built yet (TS6305): build them once with
+# `tsc -b`, or set your own lint command. The tsc
+# fallback writes no JavaScript (an `incremental` tsconfig still writes .tsbuildinfo).
+# A package without its dependencies, or without a script to run, is skipped with a
+# note and never blocks. TypeScript never
+# uses the top-level [lint] and [tests], which stay for Go or Rust code in the same
+# repository. A `command` set here always wins; "" turns the stage off.
+[languages.typescript.lint]
+# Unchanged: the default command. Set one when the default does not fit, for example:
+# command = "pnpm run type-check"     # a type-check script that calls pnpm or turbo
+# command = "yarn tsc --noEmit"       # Yarn Plug'n'Play (dependencies not in node_modules)
+# command = "node_modules/.bin/tsc -b --noEmit"   # build mode for a solution-style config
+timeout_seconds = 300        # default
+
+[languages.typescript.tests]
+# Unchanged: the default command. Set one when the default does not fit, for example:
+# command = "pnpm test"               # a test script that calls pnpm -r or turbo
+# command = "yarn test"               # Yarn Plug'n'Play (dependencies not in node_modules)
+# command = "node_modules/.bin/vitest run src"   # a `test` script that also runs e2e
+# command = "node_modules/.bin/jest"  # skip a slow `pretest` (prisma generate, ...)
+timeout_seconds = 600        # default
+
+# Monorepos: each command runs once per package, in the folder of the nearest
+# package.json with a script the default test command runs (test:unit, test:unit:ci,
+# unit or a real `test`). A change in a package with its own such script (apps/web,
+# apps/api, ...) runs there only, never at the root, even when the root's `test` script
+# runs them all (`turbo run test`). A change in a package without one runs at the
+# nearest folder above it that has one, often the root. Give each package its own
+# `test` (or `test:unit`) script to run it on its own.
+
+[hooks]
+mode = "changed"             # default; changed | ratchet | all
+max_stop_iterations = 5      # default
+# The built-in exclude list already skips node_modules (at any depth), dist, .next,
+# coverage, a top-level build folder, *.min.js and *.d.ts. To skip more, add globs with
+# `exclude_extra` (it keeps the built-in list):
+# exclude_extra = ["apps/web/build/**"]
+# Setting `exclude` replaces that list, so copy it from docs/configuration.md ("Paths")
+# first if you want that instead.

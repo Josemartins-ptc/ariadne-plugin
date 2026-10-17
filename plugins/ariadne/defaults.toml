@@ -1,0 +1,5 @@
+# Organisation-wide Ariadne defaults go here. This file sits between the built-in
+# defaults and each project's .ariadne.toml. A list such as [hooks] exclude replaces
+# the built-in list, so restate the built-in entries you want to keep; [hooks]
+# exclude_extra adds to it instead (and to each project's own exclude_extra).
+version = 1

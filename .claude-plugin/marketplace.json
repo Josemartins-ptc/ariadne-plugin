@@ -1,0 +1,16 @@
+{
+  "name": "ariadne-plugins",
+  "description": "Ariadne: a deterministic complexity guard for Claude Code.",
+  "owner": {
+    "name": "José Martins",
+    "url": "https://github.com/Josemartins-ptc"
+  },
+  "plugins": [
+    {
+      "name": "ariadne",
+      "source": "./plugins/ariadne",
+      "description": "Keeps the agent refactoring until changed functions meet their complexity, length, parameter and nesting limits.",
+      "category": "code-quality"
+    }
+  ]
+}
