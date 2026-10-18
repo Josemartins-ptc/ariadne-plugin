@@ -238,17 +238,3 @@ isn't.
 - **Outside tools count differently from Ariadne.** For example, lizard counts `&&` and
   `||`. So a function within Ariadne's limits can still show CCN 11–14 in lizard.
 - **No "instruction only" arm** (see above).
-
-## Changes after the design was written
-
-As listed at the end of `design.md`:
-
-- We added a second series with Opus, the model most people use for serious work. The Sonnet series is kept
-  and reported in full.
-- The Opus series' judge is `claude-fable-5-1`, so no model judges its own code.
-- The pilot found three bugs in the runner, which were fixed. Pilot runs are left out of all
-  results and not published.
-- The "blocked vs. never blocked" split was added after the pilot showed that some runs
-  were never blocked.
-
-The report adds one item that `design.md` did not plan: judging costs were not recorded.
