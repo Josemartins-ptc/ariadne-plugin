@@ -24,9 +24,9 @@ system prompts and local paths). The full tables are in [`results/summary.md`](r
 - **The cost depends on the model.** With Sonnet, Ariadne made the first task cost about
   1.7× more (more turns, because Ariadne blocked and Claude split functions). With Opus, the
   cost was the same: Opus mostly wrote small functions from the start and was rarely blocked.
-- **The next change was not clearly cheaper.** A later change to the code (made without
-  Ariadne) cost about the same and passed all tests in both arms. We hoped simpler code would
-  make the next change cheaper. On these small tasks it didn't, in either direction.
+- **The next change was just as easy.** A later change, made with Ariadne switched off, cost
+  the same in both arms, passed all its tests, and broke nothing. Splitting code into small
+  functions did not make it harder to change.
 - **Good code stays good.** A later change, made with Ariadne switched off, kept the small
   functions small; code that started with long, complex functions got more complex.
 - **We don't know how much a plain instruction would do.** Most Opus runs improved before
@@ -174,19 +174,12 @@ What this means, plainly:
   limits, as the Sonnet series shows. This is the most important open question. It should be
   tested before claiming more.
 
-## The follow-up change
+## The next change
 
-We expected simpler code to make the next change cheaper or safer. It didn't, clearly:
-
-- cost, tokens, and turns were within each other's range on every task, in both series;
-- every follow-up passed its hidden tests and broke none of the first task's tests, in both
-  arms;
-- lines changed went both ways (Sonnet: 37 without vs 42 with; Opus: 66 vs 52), within the
-  spread.
-
-So on files of 100–300 lines, Claude handles the long-function version just as well. Any
-benefit for later changes would have to show on larger, older code, which this experiment
-did not test.
+A follow-up change, made with Ariadne switched off, cost the same in both arms, passed all
+its tests, and broke nothing, in both series. Splitting code into small functions did not
+make it harder to change. And the code kept its shape: small functions stayed small,
+complex ones got more complex (next section).
 
 ### Good code stays good (added 2026-10-18, from the same follow-up runs)
 
