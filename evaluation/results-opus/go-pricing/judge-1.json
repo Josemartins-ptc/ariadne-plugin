@@ -1,0 +1,23 @@
+{
+ "task": "go-pricing",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits the pricing pipeline into small named steps (validate, discountedAmount, applyCoupon, shippingCost) that document the discount order and can each be read, tested and changed in isolation, whereas A interleaves subtotal, member discount, quantity and weight in one loop and keeps all rules in a single long function.",
+   "cost_usd": 0.15418225000000002
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A names each pricing rule (validate, memberDiscount, applyCoupon, shippingCost) so each can be read, tested and changed in isolation, whereas Version B folds everything into one ~90-line Quote where a change to one rule risks touching the shared loop and intermediate variables.",
+   "cost_usd": 0.16409225
+  }
+ ],
+ "result": "with"
+}

@@ -1,0 +1,66 @@
+{
+ "task": "go-pricing",
+ "arm": "with",
+ "rep": 2,
+ "step": "first",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 13.9,
+  "cost_usd": 0.07460870000000001,
+  "turns": 4,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 6,
+  "output_tokens": 1668,
+  "cache_read": 58687,
+  "cache_creation": 13012,
+  "models": [
+   "claude-sonnet-5-5"
+  ],
+  "plugins": [
+   "ariadne",
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "6ebd7105-4152-4837-bfb3-45448cba386d",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": [
+    "Ariadne \u2713 lint passed \u00b7 4 functions within limits \u00b7 tests passed"
+   ]
+  }
+ },
+ "hidden": {
+  "passed": 30,
+  "total": 30
+ },
+ "metrics": {
+  "files": [
+   "pricing.go"
+  ],
+  "lizard": {
+   "functions": 4,
+   "ccn_max": 12,
+   "ccn_p90": 12,
+   "ccn_over_10": 1,
+   "nloc_total": 85,
+   "nloc_max": 42,
+   "params_max": 3
+  },
+  "cognitive_tool": "gocognit",
+  "cognitive": {
+   "max": 13,
+   "p90": 13,
+   "over_15": 0
+  },
+  "ariadne": {
+   "functions": 4,
+   "cognitive_max": 13,
+   "over_limits": 0
+  }
+ }
+}

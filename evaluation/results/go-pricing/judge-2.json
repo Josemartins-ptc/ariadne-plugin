@@ -1,0 +1,23 @@
+{
+ "task": "go-pricing",
+ "rep": 2,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits validation, member discounts, and coupon logic into small named helpers, and keeps region rates in a single table that drives both validation and lookup, so each rule is easier to find and change than in B's single long function.",
+   "cost_usd": 0.0435018
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B separates validation, member discounts, coupon logic, and region rates into small named functions and a data table. That makes each pricing rule easy to locate and change in isolation, while A packs everything into one long function with magic-number tuples.",
+   "cost_usd": 0.042061799999999996
+  }
+ ],
+ "result": "with"
+}

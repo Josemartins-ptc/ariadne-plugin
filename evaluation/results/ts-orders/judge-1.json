@@ -1,0 +1,23 @@
+{
+ "task": "ts-orders",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B's `ALLOWED_FROM` table shows every legal transition in one place, and it keeps validation separate from state changes, so adding or changing an event is more local; its weak spots are the unchecked `deliveredAt as string` cast and the refund-specific checks scattered through `apply`.",
+   "cost_usd": 0.0470698
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A keeps the allowed transitions in one declarative table and splits validation, state changes and history into small focused functions, so each rule is easier to find and change than in B's long switch, though its refund checks in `apply` and the `deliveredAt as string` cast are minor blemishes.",
+   "cost_usd": 0.0520618
+  }
+ ],
+ "result": "with"
+}

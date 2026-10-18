@@ -1,0 +1,23 @@
+{
+ "task": "go-pricing",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B breaks the pricing rules into small, well-named helpers (regionRates table, lineDiscount, applyCoupon, shippingCost) so each policy can be read and changed in isolation, while A packs everything into one long function; B's only blemish is the vague variable name `x`.",
+   "cost_usd": 0.0433178
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "A splits validation, member discounts, coupons and shipping into small named helpers and keeps region rates in a data table, so each rule can be found, tested and changed on its own, while B packs every rule into one long function (A's only real blemish is the vague variable name `x`).",
+   "cost_usd": 0.0450738
+  }
+ ],
+ "result": "with"
+}

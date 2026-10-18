@@ -1,0 +1,23 @@
+{
+ "task": "go-logstats",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits parsing and summarising into small, single-purpose, independently testable helpers (parsePath, parseStatus, p95, topPaths, timeBounds), whereas B packs all aggregation into one long Analyze and all field validation into one long parseLine, making each harder to read and change safely.",
+   "cost_usd": 0.18061225
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "Version B separates parsing from summarizing and splits each field and statistic into a small, independently testable, well-named helper, whereas Version A mixes parsing, aggregation, sorting and percentile logic into one long Analyze loop.",
+   "cost_usd": 0.18258225
+  }
+ ],
+ "result": "with"
+}

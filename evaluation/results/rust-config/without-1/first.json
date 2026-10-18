@@ -1,0 +1,57 @@
+{
+ "task": "rust-config",
+ "arm": "without",
+ "rep": 1,
+ "step": "first",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 42.2,
+  "cost_usd": 0.15635280000000001,
+  "turns": 5,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 8,
+  "output_tokens": 6750,
+  "cache_read": 87728,
+  "cache_creation": 20016,
+  "models": [
+   "claude-sonnet-5-5"
+  ],
+  "plugins": [
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "adab9d89-1441-4d08-92c3-60587ec2f0a7",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": []
+  }
+ },
+ "hidden": {
+  "passed": 30,
+  "total": 30
+ },
+ "metrics": {
+  "files": [
+   "src/lib.rs"
+  ],
+  "lizard": {
+   "functions": 7,
+   "ccn_max": 26,
+   "ccn_p90": 26,
+   "ccn_over_10": 2,
+   "nloc_total": 170,
+   "nloc_max": 68,
+   "params_max": 3
+  },
+  "ariadne": {
+   "functions": 7,
+   "cognitive_max": 37,
+   "over_limits": 3
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "task": "js-markdown",
+ "rep": 2,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "A splits inline parsing into small named matcher functions driven by a rules list and renders blocks from plain data, so adding or changing a rule is a local edit, whereas B packs all inline logic into one long loop with numeric level flags and interleaves block rendering with the parsing loop via a closure.",
+   "cost_usd": 0.18134224999999998
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "Version B splits inline parsing into small per-rule functions driven by a readable rule list with named options, and separates block accumulation from block rendering, whereas A packs everything into one long loop keyed on opaque numeric level constants.",
+   "cost_usd": 0.16690225
+  }
+ ],
+ "result": "with"
+}

@@ -1,0 +1,9 @@
+{
+  "language": "go",
+  "test_cmd": "go test -json ./...",
+  "result_parser": "go-json",
+  "allowed_tools": ["Read", "Edit", "Write", "Bash", "Glob", "Grep"],
+  "hidden_files": ["hidden_test.go"],
+  "followup_hidden_files": ["followup_hidden_test.go"],
+  "followup_replaces": []
+}

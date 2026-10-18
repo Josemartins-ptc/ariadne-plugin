@@ -1,0 +1,23 @@
+{
+ "task": "js-markdown",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "Version B splits inline parsing into small named rule functions dispatched by `matchAt` and uses a clear boolean flag, while Version A packs everything into one long branching loop with magic numeric modes (0/1/2) and a redundant condition, which makes A harder to follow and riskier to change.",
+   "cost_usd": 0.04770580000000001
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A breaks inline parsing into small named rule functions with a clear dispatcher and a boolean flag, while Version B packs every rule into one deeply nested loop driven by an opaque numeric mode with a convoluted italic condition, so B is harder to read and riskier to change.",
+   "cost_usd": 0.0444658
+  }
+ ],
+ "result": "with"
+}

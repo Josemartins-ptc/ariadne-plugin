@@ -1,0 +1,23 @@
+{
+ "task": "ts-orders",
+ "rep": 2,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "B",
+   "winner": "without",
+   "reason": "Version B keeps each event's validation and state changes together in one exhaustive switch, while Version A splits the refund logic between `apply` and its handler and needs an unsafe cast in `transition` to make the handler map type-check.",
+   "cost_usd": 0.0488018
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "A",
+   "winner": "without",
+   "reason": "Version A keeps each event's guard and state change together in one switch with no type casts, while B splits refund's validation away from its handler and has to cast the handler map, so it adds indirection without making the code safer to change.",
+   "cost_usd": 0.0504738
+  }
+ ],
+ "result": "without"
+}

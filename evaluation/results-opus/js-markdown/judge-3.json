@@ -1,0 +1,23 @@
+{
+ "task": "js-markdown",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits inline parsing into small single-purpose functions (parseAt/parseLink/parseEmphasis) with a trivial driver loop, so adding or changing a rule is localized, whereas A packs everything into one long loop with manual literal-buffer flushing that is easier to get wrong when edited.",
+   "cost_usd": 0.18943225000000002
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "A splits inline parsing into small single-purpose functions (parseAt, parseLink, parseEmphasis) with a trivial driver loop, so each rule can be read and changed in isolation, whereas B packs all rules, the literal-buffer flushing, and nested fallthrough conditions into one long renderInline that is harder to reason about safely.",
+   "cost_usd": 0.17051225
+  }
+ ],
+ "result": "with"
+}

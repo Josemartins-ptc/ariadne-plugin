@@ -1,0 +1,23 @@
+{
+ "task": "js-markdown",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits inline parsing into small single-purpose try* functions with a flat matchAt dispatcher and separates block grouping from rendering, so adding or changing a rule touches one obvious place, whereas A's renderInline is one long loop of nested conditionals with duplicated advance/continue logic; B's only wart is heading blocks using `text` while others use `lines`.",
+   "cost_usd": 0.19017225000000001
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "A splits inline parsing into small single-purpose functions (tryCode, tryWrapped, tryLink, matchAt) with an explicit nesting-level rule, so adding or changing a rule is a local edit, whereas B's single long renderInline loop with nested ifs and the inline block-grouping in render spread the same logic across more state to track.",
+   "cost_usd": 0.18418225
+  }
+ ],
+ "result": "with"
+}

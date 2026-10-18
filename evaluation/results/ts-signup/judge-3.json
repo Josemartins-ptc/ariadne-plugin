@@ -1,0 +1,23 @@
+{
+ "task": "ts-signup",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits each field's rules into small, single-purpose functions (passwordError, usernameError, referralError, ageOn, minAge) and keeps validateSignup a flat, uniform list of calls, which makes each rule easy to find, test and change; Version B inlines password, username and referral logic into the main function and packs parsing, date validation, age calculation and per-country rules into one birthDateError, although its step-by-step email checks are more readable than A's lookaround regexes.",
+   "cost_usd": 0.053273799999999996
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits each rule into small, named, single-purpose functions (passwordError, usernameError, ageOn, minAge, referralError), so each rule can be read, tested and changed in isolation, whereas A puts password, username and referral logic inline in validateSignup; B's dense lookaround email regexes are the one place where A's explicit step-by-step checks read better.",
+   "cost_usd": 0.052989800000000004
+  }
+ ],
+ "result": "with"
+}

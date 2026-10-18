@@ -1,0 +1,71 @@
+{
+ "task": "go-logstats",
+ "arm": "with",
+ "rep": 3,
+ "step": "follow",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 25.0,
+  "cost_usd": 0.11561540000000001,
+  "turns": 9,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 10,
+  "output_tokens": 3655,
+  "cache_read": 114414,
+  "cache_creation": 16901,
+  "models": [
+   "claude-sonnet-5-5"
+  ],
+  "plugins": [
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "a69297cb-5ef8-4472-b854-ef7c97c0f06e",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": []
+  }
+ },
+ "diff": {
+  "added": 44,
+  "removed": 5
+ },
+ "hidden_follow": {
+  "passed": 13,
+  "total": 13
+ },
+ "hidden_first_again": {
+  "passed": 28,
+  "total": 28
+ },
+ "metrics": {
+  "files": [
+   "logstats.go"
+  ],
+  "lizard": {
+   "functions": 15,
+   "ccn_max": 15,
+   "ccn_p90": 11,
+   "ccn_over_10": 2,
+   "nloc_total": 181,
+   "nloc_max": 44,
+   "params_max": 2
+  },
+  "cognitive_tool": "gocognit",
+  "cognitive": {
+   "max": 20,
+   "p90": 10,
+   "over_15": 1
+  },
+  "ariadne": {
+   "functions": 14,
+   "cognitive_max": 20,
+   "over_limits": 1
+  }
+ }
+}

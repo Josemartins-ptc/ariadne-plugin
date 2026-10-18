@@ -1,0 +1,23 @@
+{
+ "task": "ts-signup",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "A factors validation into small named helpers and constants (isValidLocalPart, isValidDomain, ageOn, named regexes) and passes already-validated values as optionals, whereas B inlines regexes, writes a long monolithic isValidEmail, and threads value-plus-boolean pairs (country/countryOk, email/emailOk) that are easier to misuse.",
+   "cost_usd": 0.19535225
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B replaces A's paired value-plus-boolean parameters (email/emailOk, country/countryOk) with optional values, names its regexes, and extracts small focused helpers like ageOn and isValidDomain, so each rule is easier to locate and change in isolation.",
+   "cost_usd": 0.20076225000000003
+  }
+ ],
+ "result": "with"
+}

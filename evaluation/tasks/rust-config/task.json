@@ -1,0 +1,8 @@
+{
+  "language": "rust",
+  "test_cmd": "cargo test --quiet",
+  "result_parser": "cargo",
+  "allowed_tools": ["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
+  "hidden_files": ["tests/hidden.rs"],
+  "followup_hidden_files": ["tests/followup_hidden.rs"]
+}

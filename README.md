@@ -156,6 +156,14 @@ they trust the folder:
   installed, or the stage is off. The note in the block report says which;
   `/ariadne:status` shows the last state.
 
+## Does it help? We measured it
+
+Six coding tasks in four languages, with and without Ariadne, on two Claude models: every
+function met the limits in 36 of 36 runs with Ariadne (0 of 36 without), a blind reviewer
+preferred the Ariadne code in 34 of 36 pairs, and every hidden test passed in both. The
+method, the tasks and every run are in [evaluation/](evaluation/), with a
+[plain-words report](evaluation/report.md).
+
 ## Documentation
 
 - [What Ariadne checks](docs/checks.md) and [how the scores are counted](docs/metrics.md)

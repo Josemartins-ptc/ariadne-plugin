@@ -1,0 +1,65 @@
+{
+ "task": "rust-config",
+ "arm": "with",
+ "rep": 1,
+ "step": "follow",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 26.9,
+  "cost_usd": 0.1155753,
+  "turns": 9,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 8,
+  "output_tokens": 3772,
+  "cache_read": 86033,
+  "cache_creation": 17309,
+  "models": [
+   "claude-sonnet-5-5"
+  ],
+  "plugins": [
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "b56ab2e7-7318-4320-ae6b-81fa98b75613",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": []
+  }
+ },
+ "diff": {
+  "added": 47,
+  "removed": 0
+ },
+ "hidden_follow": {
+  "passed": 14,
+  "total": 14
+ },
+ "hidden_first_again": {
+  "passed": 30,
+  "total": 30
+ },
+ "metrics": {
+  "files": [
+   "src/lib.rs"
+  ],
+  "lizard": {
+   "functions": 16,
+   "ccn_max": 8,
+   "ccn_p90": 6,
+   "ccn_over_10": 0,
+   "nloc_total": 205,
+   "nloc_max": 24,
+   "params_max": 4
+  },
+  "ariadne": {
+   "functions": 18,
+   "cognitive_max": 10,
+   "over_limits": 0
+  }
+ }
+}

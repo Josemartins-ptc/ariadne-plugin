@@ -1,0 +1,66 @@
+{
+ "task": "ts-orders",
+ "arm": "with",
+ "rep": 1,
+ "step": "first",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 38.8,
+  "cost_usd": 0.1471303,
+  "turns": 10,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 14,
+  "output_tokens": 5512,
+  "cache_read": 170903,
+  "cache_creation": 18723,
+  "models": [
+   "claude-sonnet-5-5"
+  ],
+  "plugins": [
+   "ariadne",
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "63dfcfb9-3f8d-4426-9300-0901c0d43f38",
+  "hook_events": {
+   "edit_blocks": 1,
+   "stop_blocks": 0,
+   "status_lines": [
+    "Ariadne \u2713 lint not run \u00b7 7 functions within limits \u00b7 tests passed"
+   ]
+  }
+ },
+ "hidden": {
+  "passed": 28,
+  "total": 28
+ },
+ "metrics": {
+  "files": [
+   "src/orders.ts"
+  ],
+  "lizard": {
+   "functions": 8,
+   "ccn_max": 9,
+   "ccn_p90": 9,
+   "ccn_over_10": 0,
+   "nloc_total": 75,
+   "nloc_max": 25,
+   "params_max": 3
+  },
+  "cognitive_tool": "sonarjs",
+  "cognitive": {
+   "max": 5,
+   "p90": 5,
+   "over_15": 0
+  },
+  "ariadne": {
+   "functions": 8,
+   "cognitive_max": 5,
+   "over_limits": 0
+  }
+ }
+}

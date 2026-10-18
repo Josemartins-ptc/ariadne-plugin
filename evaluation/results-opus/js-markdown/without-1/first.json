@@ -1,0 +1,63 @@
+{
+ "task": "js-markdown",
+ "arm": "without",
+ "rep": 1,
+ "step": "first",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 40.6,
+  "cost_usd": 0.23886079999999998,
+  "turns": 6,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 10,
+  "output_tokens": 4539,
+  "cache_read": 110444,
+  "cache_creation": 15744,
+  "models": [
+   "claude-opus-5-5"
+  ],
+  "plugins": [
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "500fa6fb-ae9c-46b4-913b-edf57090803d",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": []
+  }
+ },
+ "hidden": {
+  "passed": 30,
+  "total": 30
+ },
+ "metrics": {
+  "files": [
+   "src/markdown.js"
+  ],
+  "lizard": {
+   "functions": 11,
+   "ccn_max": 16,
+   "ccn_p90": 6,
+   "ccn_over_10": 1,
+   "nloc_total": 113,
+   "nloc_max": 56,
+   "params_max": 3
+  },
+  "cognitive_tool": "sonarjs",
+  "cognitive": {
+   "max": 35,
+   "p90": 35,
+   "over_15": 1
+  },
+  "ariadne": {
+   "functions": 8,
+   "cognitive_max": 35,
+   "over_limits": 1
+  }
+ }
+}

@@ -1,0 +1,8 @@
+{
+  "language": "ts",
+  "test_cmd": "node --test --test-reporter=tap",
+  "result_parser": "node-tap",
+  "allowed_tools": ["Read", "Edit", "Write", "Bash", "Glob", "Grep"],
+  "hidden_files": ["src/hidden.test.ts"],
+  "followup_hidden_files": ["src/followup_hidden.test.ts"]
+}

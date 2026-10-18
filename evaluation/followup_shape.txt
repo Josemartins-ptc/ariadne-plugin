@@ -1,0 +1,78 @@
+== results
+go-logstats  with-1     CCN 10->15  NLOCmax  25-> 44  over10 0->1
+go-logstats  with-2     CCN 10->10  NLOCmax  26-> 36  over10 0->0
+go-logstats  with-3     CCN 11->15  NLOCmax  25-> 44  over10 1->2
+go-logstats  without-1  CCN 18->22  NLOCmax  54-> 62  over10 2->2
+go-logstats  without-2  CCN 28->37  NLOCmax  84->103  over10 1->1
+go-logstats  without-3  CCN 27->27  NLOCmax  74-> 74  over10 2->2
+go-pricing   with-1     CCN  8-> 9  NLOCmax  41-> 47  over10 0->0
+go-pricing   with-2     CCN 12->12  NLOCmax  42-> 45  over10 1->1
+go-pricing   with-3     CCN 12->13  NLOCmax  41-> 47  over10 1->1
+go-pricing   without-1  CCN 28->30  NLOCmax  78-> 86  over10 1->1
+go-pricing   without-2  CCN 28->31  NLOCmax  79-> 90  over10 1->1
+go-pricing   without-3  CCN 28->31  NLOCmax  78-> 89  over10 1->1
+js-markdown  with-1     CCN  7-> 7  NLOCmax  23-> 40  over10 0->0
+js-markdown  with-2     CCN  7-> 7  NLOCmax  25-> 40  over10 0->0
+js-markdown  with-3     CCN  6-> 6  NLOCmax  25-> 57  over10 0->0
+js-markdown  without-1  CCN 16->16  NLOCmax  49-> 49  over10 1->1
+js-markdown  without-2  CCN 17->17  NLOCmax  51-> 51  over10 1->1
+js-markdown  without-3  CCN 17->17  NLOCmax  52-> 52  over10 1->1
+rust-config  with-1     CCN  8-> 8  NLOCmax  24-> 24  over10 0->0
+rust-config  with-2     CCN  9-> 9  NLOCmax  24-> 24  over10 0->0
+rust-config  with-3     CCN  9-> 9  NLOCmax  24-> 24  over10 0->0
+rust-config  without-1  CCN 26->28  NLOCmax  68-> 77  over10 2->2
+rust-config  without-2  CCN 24->26  NLOCmax  78-> 87  over10 1->1
+rust-config  without-3  CCN 27->29  NLOCmax  68-> 76  over10 1->1
+ts-orders    with-1     CCN  9->12  NLOCmax  25-> 42  over10 0->1
+ts-orders    with-2     CCN  7-> 7  NLOCmax  21-> 21  over10 0->0
+ts-orders    with-3     CCN  8->11  NLOCmax  22-> 38  over10 0->1
+ts-orders    without-1  CCN 28->35  NLOCmax  76-> 98  over10 1->1
+ts-orders    without-2  CCN 18->21  NLOCmax  74-> 96  over10 1->1
+ts-orders    without-3  CCN 18->21  NLOCmax  74-> 96  over10 1->1
+ts-signup    with-1     CCN  8->10  NLOCmax  17-> 18  over10 0->0
+ts-signup    with-2     CCN  9->11  NLOCmax  17-> 19  over10 0->1
+ts-signup    with-3     CCN  9->11  NLOCmax  17-> 19  over10 0->1
+ts-signup    without-1  CCN 41->51  NLOCmax  66-> 78  over10 2->2
+ts-signup    without-2  CCN 36->45  NLOCmax  45-> 52  over10 2->2
+ts-signup    without-3  CCN 21->31  NLOCmax  36-> 47  over10 3->3
+with median CCN max before/after 9.0 10.0 NLOC max 24.5 39.0 runs with any CCN>10 after 8 / 18
+without median CCN max before/after 26.5 28.5 NLOC max 71.0 77.5 runs with any CCN>10 after 18 / 18
+== results-opus
+go-logstats  with-1     CCN 10->10  NLOCmax  22-> 22  over10 0->0
+go-logstats  with-2     CCN 10->11  NLOCmax  46-> 52  over10 0->1
+go-logstats  with-3     CCN 10->10  NLOCmax  27-> 31  over10 0->0
+go-logstats  without-1  CCN 17->23  NLOCmax  48-> 71  over10 2->2
+go-logstats  without-2  CCN 18->18  NLOCmax  47-> 53  over10 2->2
+go-logstats  without-3  CCN 19->19  NLOCmax  52-> 54  over10 2->2
+go-pricing   with-1     CCN  9-> 9  NLOCmax  24-> 27  over10 0->0
+go-pricing   with-2     CCN 14->15  NLOCmax  44-> 51  over10 1->1
+go-pricing   with-3     CCN 10->10  NLOCmax  36-> 40  over10 0->0
+go-pricing   without-1  CCN 28->30  NLOCmax  73-> 82  over10 1->1
+go-pricing   without-2  CCN 28->30  NLOCmax  73-> 82  over10 1->1
+go-pricing   without-3  CCN 29->30  NLOCmax  75-> 81  over10 1->1
+js-markdown  with-1     CCN  9-> 9  NLOCmax  19-> 89  over10 0->0
+js-markdown  with-2     CCN  7-> 7  NLOCmax  23-> 69  over10 0->0
+js-markdown  with-3     CCN 11->11  NLOCmax  17-> 68  over10 1->1
+js-markdown  without-1  CCN 16->16  NLOCmax  56-> 77  over10 1->1
+js-markdown  without-2  CCN 16->16  NLOCmax  57-> 68  over10 1->1
+js-markdown  without-3  CCN 15->15  NLOCmax  57-> 74  over10 1->1
+rust-config  with-1     CCN 10->10  NLOCmax  28-> 28  over10 0->0
+rust-config  with-2     CCN 11->11  NLOCmax  25-> 25  over10 1->1
+rust-config  with-3     CCN 11->11  NLOCmax  26-> 26  over10 1->1
+rust-config  without-1  CCN 19->21  NLOCmax  63-> 72  over10 1->1
+rust-config  without-2  CCN 21->23  NLOCmax  65-> 74  over10 1->1
+rust-config  without-3  CCN 26->28  NLOCmax  72-> 81  over10 1->1
+ts-orders    with-1     CCN  3-> 3  NLOCmax  16-> 18  over10 0->0
+ts-orders    with-2     CCN  7->10  NLOCmax  16-> 18  over10 0->0
+ts-orders    with-3     CCN  3-> 3  NLOCmax  16-> 18  over10 0->0
+ts-orders    without-1  CCN 12->15  NLOCmax  52-> 68  over10 1->1
+ts-orders    without-2  CCN 18->21  NLOCmax  64-> 80  over10 1->1
+ts-orders    without-3  CCN 18->21  NLOCmax  58-> 74  over10 1->1
+ts-signup    with-1     CCN  8->10  NLOCmax  11-> 18  over10 0->0
+ts-signup    with-2     CCN  8->10  NLOCmax  10-> 17  over10 0->0
+ts-signup    with-3     CCN  8->10  NLOCmax  18-> 23  over10 0->0
+ts-signup    without-1  CCN 17->17  NLOCmax  18-> 22  over10 1->1
+ts-signup    without-2  CCN 26->35  NLOCmax  62-> 74  over10 1->1
+ts-signup    without-3  CCN 20->20  NLOCmax  25-> 32  over10 2->4
+with median CCN max before/after 9.5 10.0 NLOC max 22.5 26.5 runs with any CCN>10 after 5 / 18
+without median CCN max before/after 18.5 21.0 NLOC max 57.5 74.0 runs with any CCN>10 after 18 / 18

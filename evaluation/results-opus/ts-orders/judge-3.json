@@ -1,0 +1,23 @@
+{
+ "task": "ts-orders",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "Version B keeps each event's state guard, validation, and resulting changes together in one typed handler, so adding or changing an event touches one place and the Handlers mapped type enforces exhaustiveness, whereas Version A splits the rules across an ALLOWED_FROM table, a special-cased refund branch, and a switch that must all stay in sync.",
+   "cost_usd": 0.16120225
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A keeps each event's guard, validation and state changes together in one typed handler, whereas B splits the same logic across a lookup table with a carved-out refund special case and a separate switch, so adding or changing an event means editing multiple places.",
+   "cost_usd": 0.15790225
+  }
+ ],
+ "result": "with"
+}

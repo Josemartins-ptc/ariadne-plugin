@@ -1,0 +1,23 @@
+{
+ "task": "go-pricing",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A breaks the same logic into small named helpers (validate, memberDiscount, applyCoupon, shippingCost) so Quote reads as a sequence of pricing steps and each rule can be changed and tested in isolation, whereas Version B is one long function where every rule is inlined.",
+   "cost_usd": 0.15800224999999998
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits the same logic into small named helpers (validate, memberDiscount, applyCoupon, shippingCost) so each rule can be read, tested, and changed in isolation, while A packs everything into one long function.",
+   "cost_usd": 0.15131225
+  }
+ ],
+ "result": "with"
+}

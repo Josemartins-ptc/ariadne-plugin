@@ -1,0 +1,66 @@
+{
+ "task": "ts-signup",
+ "arm": "with",
+ "rep": 3,
+ "step": "first",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 42.8,
+  "cost_usd": 0.21875920000000001,
+  "turns": 4,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 8,
+  "output_tokens": 4033,
+  "cache_read": 83616,
+  "cache_creation": 15168,
+  "models": [
+   "claude-opus-5-5"
+  ],
+  "plugins": [
+   "ariadne",
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "5938489b-64b8-4295-9ad6-bc6f29926146",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": [
+    "Ariadne \u2713 lint not run \u00b7 14 functions within limits \u00b7 tests passed"
+   ]
+  }
+ },
+ "hidden": {
+  "passed": 30,
+  "total": 30
+ },
+ "metrics": {
+  "files": [
+   "src/signup.ts"
+  ],
+  "lizard": {
+   "functions": 16,
+   "ccn_max": 8,
+   "ccn_p90": 8,
+   "ccn_over_10": 0,
+   "nloc_total": 108,
+   "nloc_max": 18,
+   "params_max": 3
+  },
+  "cognitive_tool": "sonarjs",
+  "cognitive": {
+   "max": 8,
+   "p90": 6,
+   "over_15": 0
+  },
+  "ariadne": {
+   "functions": 14,
+   "cognitive_max": 8,
+   "over_limits": 0
+  }
+ }
+}

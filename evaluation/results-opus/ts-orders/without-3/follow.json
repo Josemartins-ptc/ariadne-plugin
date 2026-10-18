@@ -1,0 +1,71 @@
+{
+ "task": "ts-orders",
+ "arm": "without",
+ "rep": 3,
+ "step": "follow",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 80.5,
+  "cost_usd": 0.38074139999999995,
+  "turns": 13,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 16,
+  "output_tokens": 8647,
+  "cache_read": 211687,
+  "cache_creation": 20675,
+  "models": [
+   "claude-opus-5-5"
+  ],
+  "plugins": [
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "660f2e41-15f0-44a5-aa83-95b8971d3b77",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": []
+  }
+ },
+ "diff": {
+  "added": 155,
+  "removed": 2
+ },
+ "hidden_follow": {
+  "passed": 13,
+  "total": 13
+ },
+ "hidden_first_again": {
+  "passed": 28,
+  "total": 28
+ },
+ "metrics": {
+  "files": [
+   "src/orders.ts"
+  ],
+  "lizard": {
+   "functions": 4,
+   "ccn_max": 21,
+   "ccn_p90": 21,
+   "ccn_over_10": 1,
+   "nloc_total": 100,
+   "nloc_max": 74,
+   "params_max": 3
+  },
+  "cognitive_tool": "sonarjs",
+  "cognitive": {
+   "max": 19,
+   "p90": 19,
+   "over_15": 1
+  },
+  "ariadne": {
+   "functions": 4,
+   "cognitive_max": 20,
+   "over_limits": 1
+  }
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "task": "rust-config",
+ "arm": "with",
+ "rep": 1,
+ "step": "first",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 88.6,
+  "cost_usd": 0.3858316,
+  "turns": 7,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 10,
+  "output_tokens": 9574,
+  "cache_read": 120638,
+  "cache_creation": 21273,
+  "models": [
+   "claude-opus-5-5"
+  ],
+  "plugins": [
+   "ariadne",
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "2467ee26-8faa-498f-b22a-1d861f7f2630",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": [
+    "Ariadne \u2713 lint passed \u00b7 15 functions within limits \u00b7 tests passed"
+   ]
+  }
+ },
+ "hidden": {
+  "passed": 30,
+  "total": 30
+ },
+ "metrics": {
+  "files": [
+   "src/lib.rs"
+  ],
+  "lizard": {
+   "functions": 15,
+   "ccn_max": 10,
+   "ccn_p90": 7,
+   "ccn_over_10": 0,
+   "nloc_total": 194,
+   "nloc_max": 28,
+   "params_max": 3
+  },
+  "ariadne": {
+   "functions": 15,
+   "cognitive_max": 9,
+   "over_limits": 0
+  }
+ }
+}

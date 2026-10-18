@@ -1,0 +1,23 @@
+{
+ "task": "ts-orders",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B keeps transition validation in `apply`, puts change computation in a separate exhaustive `changes` switch, and moves per-event checks into small named helpers (`payChanges`, `shipChanges`, `returnChanges`), so each piece is easier to read and change than A's single long nested function.",
+   "cost_usd": 0.047117799999999994
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits each transition's validation and state changes into small named helpers returning Partial<Order>, keeping the guard logic in apply short and the per-event logic easy to find and change, whereas B packs everything into one long function with a mutable `changes` variable and break-based switch.",
+   "cost_usd": 0.0446778
+  }
+ ],
+ "result": "with"
+}

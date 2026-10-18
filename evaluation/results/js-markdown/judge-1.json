@@ -1,0 +1,23 @@
+{
+ "task": "js-markdown",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits inline parsing into small `tryCode`/`tryLink`/`tryBold`/`tryItalic` helpers that share one `{html, next}` return shape, so each rule can be read and changed on its own, whereas A packs every rule into one long branching loop with scattered `continue`s.",
+   "cost_usd": 0.0474578
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits inline parsing into small named helpers (tryCode, tryLink, tryBold, tryItalic) dispatched by matchAt, while Version B packs every construct into one long branchy loop with scattered `continue`s and fall-throughs, which makes A easier to read and safer to change.",
+   "cost_usd": 0.0486698
+  }
+ ],
+ "result": "with"
+}

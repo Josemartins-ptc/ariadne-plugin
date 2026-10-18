@@ -1,0 +1,23 @@
+{
+ "task": "go-pricing",
+ "rep": 2,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits each pricing rule into a small, named, independently testable helper (member discount, coupon, shipping) and documents the region rate fields, whereas Version B folds everything into one long Quote function where unrelated rules are interleaved in a single loop.",
+   "cost_usd": 0.15819225
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "Version B splits the monolithic Quote into small, named, documented helpers (countedItems, memberDiscount, applyCoupon, shippingCost) and a knownCoupons table, so each rule can be read, tested, and changed in isolation while remaining behaviorally identical to A.",
+   "cost_usd": 0.15075225
+  }
+ ],
+ "result": "with"
+}

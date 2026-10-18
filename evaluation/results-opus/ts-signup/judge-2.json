@@ -1,0 +1,23 @@
+{
+ "task": "ts-signup",
+ "rep": 2,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "A isolates each field's rules in a small, independently testable validator and assembles results in one readable table, whereas B packs everything into one long function with redundant str() coercions of already-typed fields and a regex that captures digits individually just to feed the checksum.",
+   "cost_usd": 0.19141225
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits each field into a small, independently testable validator returning an error code, so rules are easy to locate and change in isolation, while A's single long function interleaves field logic and shared state (localPart, countryValid) that must be traced through the whole body.",
+   "cost_usd": 0.18799225
+  }
+ ],
+ "result": "with"
+}

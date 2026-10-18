@@ -1,0 +1,23 @@
+{
+ "task": "go-pricing",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits validation, member discounts, and coupon logic into small named helpers and keeps region rates in a single data table, so each rule can be read and changed in isolation, whereas B packs everything into one long Quote function.",
+   "cost_usd": 0.0435858
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B behaves the same as A but moves validation, member discount, coupon logic and region rates into small named helpers and a lookup table, so Quote reads as a clear pipeline and each rule can be found and changed in one place.",
+   "cost_usd": 0.0438618
+  }
+ ],
+ "result": "with"
+}

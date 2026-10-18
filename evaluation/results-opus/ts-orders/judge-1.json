@@ -1,0 +1,23 @@
+{
+ "task": "ts-orders",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "Version B keeps each event's preconditions and resulting changes together in one typed handler, so adding or changing an event touches one place, whereas A splits the rules between a transition table, a special-cased refund branch, and a switch that mutates a copy.",
+   "cost_usd": 0.16308225
+  },
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Each event's state guard, validation, and resulting changes live together in one typed handler that the mapped type forces to be exhaustive, whereas B scatters the rules across a lookup table, a special-cased refund branch in checkTransition, and a mutating switch with no exhaustiveness check.",
+   "cost_usd": 0.17604225
+  }
+ ],
+ "result": "with"
+}

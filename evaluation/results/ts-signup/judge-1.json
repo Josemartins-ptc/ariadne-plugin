@@ -1,0 +1,23 @@
+{
+ "task": "ts-signup",
+ "rep": 1,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A splits each field's rules into small, named, independently testable functions (emailError, passwordError, parseYmd, ageOn, minAge, etc.) with a short orchestrator, whereas Version B packs all logic into one long function with mutable locals and inline date math that is harder to read and change safely.",
+   "cost_usd": 0.0506818
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "B splits each field's rules into small, named, independently testable functions with a short top-level orchestrator, whereas A packs everything into one long function with shared mutable state (emailOk, by/bm/bd), though B drops A's runtime typeof guards and leans on a dense lookahead regex.",
+   "cost_usd": 0.0506018
+  }
+ ],
+ "result": "with"
+}

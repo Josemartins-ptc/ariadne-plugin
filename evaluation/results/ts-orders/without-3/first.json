@@ -1,0 +1,63 @@
+{
+ "task": "ts-orders",
+ "arm": "without",
+ "rep": 3,
+ "step": "first",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 13.1,
+  "cost_usd": 0.07239190000000001,
+  "turns": 4,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 6,
+  "output_tokens": 1758,
+  "cache_read": 56839,
+  "cache_creation": 12279,
+  "models": [
+   "claude-sonnet-5-5"
+  ],
+  "plugins": [
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "afb6c768-34f9-4f8b-bb50-f25045b5fdca",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": []
+  }
+ },
+ "hidden": {
+  "passed": 28,
+  "total": 28
+ },
+ "metrics": {
+  "files": [
+   "src/orders.ts"
+  ],
+  "lizard": {
+   "functions": 4,
+   "ccn_max": 18,
+   "ccn_p90": 18,
+   "ccn_over_10": 1,
+   "nloc_total": 101,
+   "nloc_max": 74,
+   "params_max": 3
+  },
+  "cognitive_tool": "sonarjs",
+  "cognitive": {
+   "max": 25,
+   "p90": 25,
+   "over_15": 1
+  },
+  "ariadne": {
+   "functions": 4,
+   "cognitive_max": 27,
+   "over_limits": 1
+  }
+ }
+}

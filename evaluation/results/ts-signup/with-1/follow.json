@@ -1,0 +1,71 @@
+{
+ "task": "ts-signup",
+ "arm": "with",
+ "rep": 1,
+ "step": "follow",
+ "run": {
+  "exit": 0,
+  "stderr_tail": "",
+  "wall_s": 18.4,
+  "cost_usd": 0.0998093,
+  "turns": 9,
+  "is_error": false,
+  "subtype": "success",
+  "input_tokens": 10,
+  "output_tokens": 2757,
+  "cache_read": 111073,
+  "cache_creation": 15278,
+  "models": [
+   "claude-sonnet-5-5"
+  ],
+  "plugins": [
+   "cc-plugin-agents-md",
+   "cc-plugin-plugin-authoring",
+   "cc-plugin-sec-default",
+   "cc-plugin-telemetry"
+  ],
+  "session": "0b40de6b-9be0-4745-a517-8c1809d88a94",
+  "hook_events": {
+   "edit_blocks": 0,
+   "stop_blocks": 0,
+   "status_lines": []
+  }
+ },
+ "diff": {
+  "added": 24,
+  "removed": 2
+ },
+ "hidden_follow": {
+  "passed": 14,
+  "total": 14
+ },
+ "hidden_first_again": {
+  "passed": 30,
+  "total": 30
+ },
+ "metrics": {
+  "files": [
+   "src/signup.ts"
+  ],
+  "lizard": {
+   "functions": 16,
+   "ccn_max": 10,
+   "ccn_p90": 8,
+   "ccn_over_10": 0,
+   "nloc_total": 93,
+   "nloc_max": 18,
+   "params_max": 5
+  },
+  "cognitive_tool": "sonarjs",
+  "cognitive": {
+   "max": 10,
+   "p90": 7,
+   "over_15": 0
+  },
+  "ariadne": {
+   "functions": 14,
+   "cognitive_max": 10,
+   "over_limits": 0
+  }
+ }
+}

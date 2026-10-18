@@ -1,0 +1,23 @@
+{
+ "task": "ts-orders",
+ "rep": 2,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "B",
+   "winner": "without",
+   "reason": "B's single switch with native discriminated-union narrowing is more direct and fully type-safe, whereas A's handler map needs the EventOf/Handlers type gymnastics plus an unsafe cast in apply and spreads loosely-typed Partial<Order> results, adding indirection without a real gain for seven small cases.",
+   "cost_usd": 0.15992225
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "A",
+   "winner": "without",
+   "reason": "Version A's single linear switch is easier to follow than B's handler map, which adds a mapped-type helper, an unsafe cast in apply, and indirection for only seven cases, without a meaningful gain in safety.",
+   "cost_usd": 0.17232224999999998
+  }
+ ],
+ "result": "without"
+}

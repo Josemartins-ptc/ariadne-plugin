@@ -1,0 +1,23 @@
+{
+ "task": "ts-signup",
+ "rep": 3,
+ "verdicts": [
+  {
+   "A": "with",
+   "B": "without",
+   "choice": "A",
+   "winner": "with",
+   "reason": "Version A composes small, single-purpose helpers with named regexes and a parseDate that returns undefined on invalid input, while Version B adds noisy runtime type-guards on an already-typed form, inlines its regexes, and scatters the same validation logic across longer imperative blocks.",
+   "cost_usd": 0.19568225
+  },
+  {
+   "A": "without",
+   "B": "with",
+   "choice": "B",
+   "winner": "with",
+   "reason": "Version B trusts the declared types instead of re-checking them with `str()`, names every regex, and splits email/date/age logic into small single-purpose helpers, so each rule is easier to find and change than in A's longer inline functions.",
+   "cost_usd": 0.19383225
+  }
+ ],
+ "result": "with"
+}
