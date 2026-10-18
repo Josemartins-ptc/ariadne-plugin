@@ -1,6 +1,6 @@
 # Does Ariadne make Claude's code better? Experiment design
 
-Written 2026-10-18, **before any run**. The measures, the tasks and the way results are
+Written **before any run**. The measures, the tasks and the way results are
 reported are fixed here, so the report cannot pick what looks good afterwards. Anything
 changed after the first run is listed in the report, with the reason.
 
@@ -24,7 +24,7 @@ the next change, and blind judging.
   (none of the user's plugins or settings). Arm **with** adds
   `--plugin-dir plugins/ariadne` (this repository): the published Ariadne 0.1.0,
   built-in defaults (no `.ariadne.toml`). Arm **without** has no Ariadne. Checked
-  2026-10-18: the init message lists the same plugins in both arms, plus `ariadne` in one.
+  before the runs: the init message lists the same plugins in both arms, plus `ariadne` in one.
 - **Model:** `claude-sonnet-5-5` for every task run in both arms (cost; a common choice for
   Claude Code). Recorded per run from the result message.
 - **Tools and permissions:** `--permission-mode acceptEdits` and the same `--allowedTools`
@@ -103,7 +103,7 @@ Expected roughly USD 40–120 in total; the report gives the real figure.
 `evaluation/`: `tasks/<task>/` (starter, prompt, hidden tests, reference, follow-up),
 `run.py` (runner), `results/` (raw JSON per run, tool outputs), `report.md`.
 
-## Changes after the first run (2026-10-18)
+## Changes after the first run
 
 - **A second series with Opus.** We added `claude-opus-5-5` as the coding model
   (the model most people use for serious work). The Sonnet series (`results/`) is kept and

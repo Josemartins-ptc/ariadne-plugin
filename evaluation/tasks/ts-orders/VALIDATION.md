@@ -1,4 +1,4 @@
-# ts-orders validation (2026-10-18, Node v25.8.2, offline)
+# ts-orders validation (Node v25.8.2, offline)
 
 Each check copies the folders named into a fresh scratch directory (overlay order as listed)
 and runs `node --test --test-reporter=tap` there.

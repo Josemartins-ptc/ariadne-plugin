@@ -1,6 +1,6 @@
 # go-logstats validation
 
-Run 2026-10-18, go1.26.5 darwin/arm64, offline, standard library only. Each check copies the
+Run on go1.26.5 darwin/arm64, offline, standard library only. Each check copies the
 listed folders, in order, into a fresh empty directory and runs `go test -json ./...`.
 Counts are top-level `Test*` pass/fail events (the go-json parser's rule).
 

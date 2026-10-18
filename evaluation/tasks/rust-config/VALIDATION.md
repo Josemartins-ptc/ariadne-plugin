@@ -1,4 +1,4 @@
-# rust-config validation (2026-10-18, cargo/rustc 1.97.0, offline)
+# rust-config validation (cargo/rustc 1.97.0, offline)
 
 Each run copies the listed folders (in order, later overlays earlier) into a fresh work dir under
 `.target/<run>/` and runs `cargo test --quiet --offline --no-fail-fast` with its OWN

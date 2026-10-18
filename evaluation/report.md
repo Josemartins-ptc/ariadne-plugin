@@ -1,6 +1,6 @@
 # Does Ariadne make Claude's code better? Report
 
-Runs done 2026-10-18. The design was written before the first run (`design.md`), and every
+The design was written before the first run (`design.md`), and every
 change made after that is listed at its end. Raw data for every run: [`results/`](results/) (Sonnet) and
 [`results-opus/`](results-opus/) (Opus): the code Claude wrote, the follow-up code, the
 measurements and the judge verdicts. The Claude session logs are not published (they hold
@@ -181,7 +181,7 @@ its tests, and broke nothing, in both series. Splitting code into small function
 make it harder to change. And the code kept its shape: small functions stayed small,
 complex ones got more complex (next section).
 
-### Good code stays good (added 2026-10-18, from the same follow-up runs)
+### Good code stays good
 
 The follow-up sessions ran **without** Ariadne, so they show what Claude does on its own
 with the code it finds. Worst function (lizard), median of 18 results per arm, before and

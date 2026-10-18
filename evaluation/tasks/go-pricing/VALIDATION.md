@@ -1,4 +1,4 @@
-# go-pricing validation (2026-10-18, go1.26.5 darwin/arm64)
+# go-pricing validation (go1.26.5 darwin/arm64)
 
 Each run assembles a fresh directory in the scratchpad by overlaying folders in order, then runs
 `go test -json ./...` and counts top-level `Test*` pass/fail events (subtests excluded), as the go-json parser does.

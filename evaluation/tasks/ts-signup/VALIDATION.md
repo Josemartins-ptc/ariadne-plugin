@@ -1,4 +1,4 @@
-# ts-signup validation (2026-10-18, Node v25.8.2, offline, no dependencies)
+# ts-signup validation (Node v25.8.2, offline, no dependencies)
 
 Each check assembles a fresh directory in the session scratchpad by overlaying the task folders
 (`cp -R <dir>/. <work>/`) in the order listed, then runs `node --test --test-reporter=tap` in it.
