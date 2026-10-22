@@ -149,6 +149,7 @@ What counts as a test function:
 | Rust | a function inside a `#[cfg(test)]` module (at any depth); a function with a `#[test]` attribute or one whose path ends in `::test` (`#[tokio::test]`), and functions nested in it; every function in a file under a `tests` folder (`tests/`, `crates/x/tests/support/mod.rs`) |
 | TypeScript | every function in a file whose name ends in `.test`, `.spec`, `.e2e-spec`, `.e2e`, `.integration-test` or `.cy` before a TypeScript extension (`cart.test.ts`, `Button.cy.tsx`); every function in a file under a folder named `__tests__`, `__mocks__`, `test`, `tests`, `testing` or `e2e` |
 | JavaScript | the same, with a JavaScript extension (`cart.test.js`, `Button.cy.jsx`, `api.spec.mjs`) |
+| Java | every function in a file under a test source set (`src/test/`, `src/testFixtures/`, `src/integrationTest/`, `src/it/`, Android's `src/androidTest/`, `src/testDebug/`: a set whose name starts with `test`, ends with `Test` or is `it`), or named `*Test.java`, `*Tests.java`, `*IT.java` or `*TestCase.java` |
 
 The `tests` folder (and each TypeScript test folder) is looked for in the path relative to
 the repository root, so a repository that happens to sit inside a `tests` folder is not
@@ -257,6 +258,8 @@ Each language can have its own commands in `[languages.<lang>.lint]` and
   600 s).
 - **JavaScript:** only `[languages.javascript.<stage>]`, as TypeScript (see
   [JavaScript](#javascript) below).
+- **Java:** only `[languages.java.<stage>]`, for the same reason. Its default timeouts are
+  lint 300 s and tests 900 s, since JVM builds are slow.
 
 Config files are read highest first (`.ariadne.toml`, then `plugin/defaults.toml`, then the
 built-in defaults), so a `[tests]` in your `.ariadne.toml` beats a `[languages.go.tests]`
@@ -439,6 +442,43 @@ bundles or old code you do not want judged. You can skip any extra folders with
 [hooks]
 exclude_extra = ["public/vendor/**", "scripts/legacy/**"]
 ```
+
+#### Java
+
+Java runs one Gradle or Maven command per build, from the build's root, naming the
+modules with changed files:
+
+| Build | Lint (compile main and test code) | Tests |
+|---|---|---|
+| Gradle | `./gradlew --console=plain :core:testClasses :web:testClasses` | `./gradlew --console=plain :core:test :web:test` |
+| Maven | `mvn -B -q -pl core,web -am test-compile` | `mvn -B -q -pl core,web -am test` |
+
+- A **module** is the nearest folder with `build.gradle`, `build.gradle.kts` or `pom.xml`,
+  or a deeper project that `settings.gradle(.kts)` names with `include` (a subproject the
+  root build configures, without a build file of its own). Its **build root** is the
+  nearest folder with `settings.gradle(.kts)` (Gradle), or the outermost `pom.xml` that
+  lists it in `<modules>` (Maven; entries inside comments or `<profiles>` do not count,
+  and `./core`, `core/` and `core/pom.xml` all name `core`). A file outside every module
+  gets the note `no Gradle or Maven build file found`.
+- A Gradle module the settings do not `include`, such as `buildSrc`, has no task to name:
+  the stage is skipped with a note. Settings that compute their projects (no `include`
+  line Ariadne can read) are taken as including every module.
+- The build's own wrapper runs when it has one (`./gradlew`, `./mvnw`), else the installed
+  `gradle` or `mvn`. Neither installed, or no Java runtime: a note, never a block.
+- Maven's `-am` also builds, and tests, the modules the changed ones depend on, which it
+  needs. When the root module itself changed, Maven runs the whole build.
+- A Gradle module path is taken from its folder (`libs/core` is `:libs:core`). A build
+  whose `settings.gradle` moves a project to another folder needs its own command.
+- **Android modules** (the Android plugin, by its id or its version-catalog alias
+  `libs.plugins.android.…`, an `android { … }` block, or `src/main/AndroidManifest.xml`)
+  have no plain `test` task: when any changed module is one, the stage is skipped for the
+  whole build, with a note. Set `[languages.java.tests]` to the task you want, for example
+  `command = "./gradlew testDebugUnitTest"`.
+- Maven modules listed by a path outside the aggregator's folder (`<module>../core</module>`)
+  are not found: each runs as its own build (known limit).
+- Java never uses the top-level `[lint]` and `[tests]`. Its own sections are
+  `[languages.java.lint]` and `[languages.java.tests]`, with timeouts of 300 s and 900 s.
+  To add PMD, Checkstyle or SpotBugs, set `command` there.
 
 #### TypeScript
 

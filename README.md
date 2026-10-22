@@ -4,6 +4,7 @@
 ![Rust](https://img.shields.io/badge/Rust-supported-B7410E?logo=rust&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-supported-3178C6?logo=typescript&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-supported-F7DF1E?logo=javascript&logoColor=black)
+![Java](https://img.shields.io/badge/Java-supported-E76F00?logo=openjdk&logoColor=white)
 ![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-informational)
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757)
 
@@ -52,7 +53,7 @@ change. When the turn ends you should see a line starting with `Ariadne`.
 In a Claude Code session in your project (or in an empty folder for a new one):
 
 1. Run `/ariadne:init`.
-2. Pick the languages the project uses (Go, TypeScript, JavaScript, Rust; you can pick
+2. Pick the languages the project uses (Go, TypeScript, JavaScript, Java, Rust; you can pick
    several, even ones with no files yet).
 3. For each language, take Ariadne's defaults or set your own limits and lint and test
    commands.
@@ -63,8 +64,8 @@ In a Claude Code session in your project (or in an empty folder for a new one):
 You run `/ariadne:init` once per project. Details: [docs/init.md](docs/init.md) and
 [docs/configuration.md](docs/configuration.md).
 
-Ariadne also checks JavaScript files. Consider asking Claude which JS files in your real
-projects would be checked (vendored scripts, generated bundles, old code you do not want
+Ariadne also checks JavaScript and Java files. Consider asking Claude which of those files
+in your real projects would be checked (vendored scripts, generated bundles, old code you do not want
 judged). You can skip any extra folders with `exclude_extra` in `.ariadne.toml`:
 
 ```toml
@@ -91,6 +92,7 @@ While the plugin is enabled, Claude can also run `ariadne check <path>` and
 | Rust | 10 | 15 | 80 | 7 | 4 |
 | TypeScript | 10 | 15 | 80 (`.tsx` 120) | 7 | 4 |
 | JavaScript | 10 | 15 | 80 (`.jsx` 120) | 7 | 4 |
+| Java | 10 | 15 | 80 | 7 | 4 |
 
 Test functions get at least 150 lines; their other limits are the same. A function fails
 when any score is above its limit; equal passes.
@@ -98,7 +100,9 @@ when any score is above its limit; equal passes.
 Lint and test commands: Go runs `go vet` and `go test`, Rust `cargo clippy` and
 `cargo test`. TypeScript and JavaScript run each package's own scripts (a type-check script,
 `npm run test:unit` or `npm test`; TypeScript also the installed `tsc`) when the package's
-dependencies are installed. See [docs/languages.md](docs/languages.md) and
+dependencies are installed. Java runs one Gradle or Maven command per build over the
+changed modules: it compiles them for lint (`testClasses`, `test-compile`) and runs their
+`test`, with the project's own wrapper when it has one. See [docs/languages.md](docs/languages.md) and
 [docs/configuration.md](docs/configuration.md).
 
 ## Update

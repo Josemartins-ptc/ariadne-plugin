@@ -29,7 +29,9 @@ Ariadne uses rejects some valid, compiling TypeScript (such as
 `importOriginal<typeof import("x")>()` or `export type * from "x"`, in about 0.2 to 0.6%
 of files). It is only the note `<file> could not be fully parsed; only the functions that
 parsed were checked`, and the functions that parsed are still judged and can block.
-The same holds for JavaScript, where a Flow-typed file (`// @flow`) is the usual cause.
+The same holds for JavaScript, where a Flow-typed file (`// @flow`) is the usual cause,
+and for Java, where the parser does not know a few valid shapes (an annotated varargs
+type, Java 25 statements before `this(…)` in a constructor; about 0.15% of files).
 
 ### Edits that only change comments
 
@@ -79,6 +81,8 @@ Some comments are code, because tools read them, so changing one counts as a cha
   (`@type`, `@typedef`, `@param {string}`, `@returns {number}` and the others listed in
   [languages.md](languages.md#javascript--tree-sitter-javascript-0250)): `tsc` reads
   them in JavaScript, so changing one runs lint and tests.
+- **Java:** a comment holding `NOPMD`, `NOSONAR`, `CHECKSTYLE:`, `checkstyle:`,
+  `@formatter:` or `spotless:`, which lint and format tools read. Javadoc is plain.
 
 Complexity debt (below) is judged as always, comments or not.
 
@@ -320,7 +324,7 @@ Claude Code sessions working there and delete `.git/ariadne/`.
 
 ## Known limits
 
-- Only Go, Rust, TypeScript and JavaScript are analyzed. Java is planned.
+- Only Go, Rust, TypeScript, JavaScript and Java are analyzed. Kotlin is planned.
 - Only macOS and Linux, on x86_64 and aarch64.
 - Git 2.30 or newer is required.
 - A Bash command can edit `.ariadne.toml`; Ariadne blocks only Write and Edit. The change

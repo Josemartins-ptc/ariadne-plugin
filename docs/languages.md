@@ -806,6 +806,159 @@ Length of JSX: in Mastodon, 3.4% of the `.jsx` functions (652) are longer than 8
 1.5% longer than 120; for its `.js` functions (628), 1.1% and 0.3%. This supports the
 `.jsx` length of 120.
 
-## Java
+## Java — `tree-sitter-java` 0.23.5
 
-Mapped and verified in a later milestone; see the spec's language table until then.
+`.java` files.
+
+### Functions and names
+
+- **Reported:** methods, constructors, record compact constructors, interface default and
+  static methods, and methods in enum constant bodies. A method without a body (abstract,
+  in an interface, an annotation element) is not a function.
+- **Names** are `Type.member`, with every enclosing type: `Orders.Line.amount`. A
+  constructor is `Type.Type`. A method in an enum constant's body adds the constant:
+  `Op.PLUS.apply`. Overloads share a name and are told apart by their line.
+- **Initializer blocks** are reported as `Type.static` (`static { … }`) and `Type.init`
+  (`{ … }`), so their logic is judged.
+- **A lambda that is a field's whole value** (`static final Comparator<X> BY_NAME = (a, b) -> …`)
+  is reported as `Type.BY_NAME`, from the field's first token to its last.
+- **Rolled into the function around them:** every other lambda, and the methods of an
+  anonymous class written inside a function (`new Runnable() { public void run() { … } }`).
+  Their bodies are one level deeper. A method of an anonymous class assigned to a field is
+  reported, named after the field: `Orders.NOTIFIER.run`.
+- **A class declared inside a method** (a local class) is a type like any other: its
+  methods are reported on their own (`Orders.Helper.twice`) and add nothing to the method
+  around them.
+- **Start line:** the first token after the annotations. `@Override` on the line above
+  does not count.
+- **Not reported (known limit):** a lambda outside every function that is not a field's
+  whole value, such as `Comparator.comparing(x -> …)` in a field, a ternary of two lambdas,
+  or a lambda passed to an enum constant (`ADD((a, b) -> …)`). Nothing in it is judged, as
+  for TypeScript's top-level callbacks.
+- **Parameters:** each formal and varargs parameter counts 1; the receiver parameter
+  (`Orders this`) counts 0. A compact constructor has its record's components.
+
+### Counting
+
+- `if`, `else if`, `else`; `for`, enhanced `for`, `while`, `do … while` (a loop with a
+  label is recorded on the label's line); `catch` (+1 per clause: `catch (A | B e)` is one);
+  the conditional `?:`; `&&` and `||` sequences; `break label` / `continue label`.
+- `switch`, both the statement and the expression, with `case …:` groups or `case … ->`
+  rules: +1 cognitive for the `switch`; +1 cyclomatic for each `case` label that is not the
+  default one. `case 1: case 2:` are two labels; `case 1, 2 ->` is one. `default` and
+  `case null, default` add nothing.
+- A pattern guard (`case Integer i when i > 3`) is a guard: +1 cyclomatic, like a Rust
+  match guard.
+- Nothing for `try`, `finally`, try-with-resources, `yield`, `throw`, `assert`,
+  `instanceof` patterns, `synchronized`, generics or annotations.
+- No counting rules to configure: `[languages.java.rules]` takes no keys.
+
+### Test code
+
+Every function in a file under a test source set (`src/<set>/` where the set's name starts
+with `test`, ends with `Test`, starts with `androidTest`, or is `it`: `src/test/`,
+`src/testFixtures/`, `src/integrationTest/`, Android's `src/androidTest/` and
+`src/testDebug/`), or in a file named `*Test.java`, `*Tests.java`, `*IT.java` or
+`*TestCase.java`.
+
+### Limits, syntax errors and comments
+
+- **Limits:** the `[thresholds]` defaults (cyclomatic 10, cognitive 15, length 80,
+  parameters 7, nesting 4), as PMD's defaults. On four large projects about 2.5% of the
+  non-test functions are over one of them.
+- **Syntax errors** never block. The grammar does not know a few valid shapes: a type
+  annotation on varargs (`Object @Nullable ... args`) and Java 25 statements before
+  `this(…)` in a constructor. Such a file gets a note, and the functions that parsed are
+  still judged.
+- **Comments that count as code:** a comment holding `NOPMD`, `NOSONAR`, `CHECKSTYLE:`,
+  `checkstyle:`, `@formatter:` or `spotless:`, which lint and format tools read. Javadoc
+  and every other comment are plain: changing only them skips lint and tests.
+- **Generated sources are skipped:** Maven's `target/generated-sources/` and
+  `target/generated-test-sources/`, and Gradle's `build/tmp/` (Gradle's `build/generated/`
+  is already skipped as `generated/`). Packages named `build` or `target` are still checked.
+
+### Lint and test commands
+
+One Gradle or Maven run per build, from its root, over the modules with changed files: lint
+compiles their main and test code (`:core:testClasses`, `test-compile`), tests runs their
+tests (`:core:test`, `test`). The wrapper runs when the build has one. Details, Android
+modules and how to set your own: [configuration.md](configuration.md#java).
+
+A failing Gradle test is named by its class (`PriceTest > addsTax() FAILED`); a failing
+Maven test by Surefire's line (`com.x.PriceTest.addsTax -- … <<< FAILURE!`, or the older
+`addsTax(com.x.PriceTest)  Time elapsed: … <<< FAILURE!`). Gradle's
+`> Task` lines and Maven's `[INFO]` lines are left out of the block report.
+
+Java never uses the top-level `[lint]` and `[tests]`: those belong to the repository's main
+language.
+
+### Cross-validation
+
+`scripts/crossval_java.py` compares Ariadne with PMD 7.28.0 (`CyclomaticComplexity` and
+`CognitiveComplexity`, reporting every method). It needs the Python packages `tree-sitter`
+and `tree-sitter-java` 0.23.5, the grammar Ariadne pins.
+
+```bash
+scripts/crossval_java.py --ariadne target/release/ariadne --pmd path/to/pmd-bin-7.28.0/bin/pmd --corpus path/to/project
+```
+
+PMD counts several things differently from Ariadne's rules. Each one was measured on small
+methods written for the purpose, and the script applies every one to Ariadne's scores; the
+result must equal PMD's, or the script fails.
+
+**Cyclomatic (PMD's):**
+
+- `&&` and `||` count only in the condition of an `if`, a loop or a ternary (`return a && b` adds nothing).
+- `+1` for each `throw`.
+- `case 1, 2 ->` counts 2 (Ariadne: 1).
+- Pattern cases and their guards count nothing.
+- A ternary that is a whole condition or `switch` subject adds 2 more.
+- Code inside lambdas and anonymous classes counts nothing.
+
+**Cognitive (PMD's):**
+
+- **Logical operators:** PMD walks the method top-down and adds 1 each time an operator
+  differs from the last one it met. It forgets the last one at each statement of a `{ }`
+  block and at each `!`. Ariadne adds 1 per run of like operators in each logical
+  expression, in source order, as the Sonar specification does. So `a || b && c || d && e`
+  is 2 for PMD and 4 for Ariadne.
+- **`else if` chains:** PMD nests the condition of the n-th `else if` n levels deeper and
+  its body n − 1 levels.
+- **Loop headers and `switch` subjects:** constructs written there are one level deeper.
+- **An `if` written directly as another `if`'s body, without braces** (`if (a) if (b) …`):
+  PMD adds nothing for it and does not nest what is inside it.
+- **Recursion:** +1 per call to the method itself. Ariadne does not count recursion.
+- **Local classes:** their methods count in the method around them, one level deeper.
+- **Anonymous classes:** a field initializer or a class declared inside one is one level deeper.
+
+The script also checks that every method PMD scores, by Ariadne's own rules, is a
+function Ariadne reports (unless its file is one Ariadne's defaults exclude), and that
+Ariadne's qualified name is the one those rules give.
+
+**Functions only one tool scores:**
+
+- Initializer blocks, field lambdas and record compact constructors (Ariadne only).
+- Methods without a body, and anonymous-class methods, which PMD also scores on their own
+  (PMD only).
+- Code PMD is told to ignore with `@SuppressWarnings("all")` or `("PMD")`.
+- Files PMD cannot analyze (its type resolution fails).
+- Files with a syntax error (see above).
+
+Results, from a release build of branch `feat/java`: **0 unexplained** on
+
+| Corpus | Commit | Ariadne functions |
+| --- | --- | --- |
+| apache/commons-lang | `b9b30ef` | 11,017 |
+| spring-projects/spring-petclinic | `500158f` | 190 |
+| google/guava | `b157643` | 53,127 |
+| apache/lucene (Java 21+) | `b4383f0` | 57,795 |
+
+About 9 in 10 functions score exactly the same in both tools. A build that stopped counting
+`catch` gave 140 unexplained differences on Commons Lang, and one that stopped reporting
+methods in enum constant bodies gave 661 on Guava, so the rules do not hide real gaps. PMD's
+JVM can fail to start when memory is short; the script then runs it once more and stops if
+it fails again, so an incomplete report is never counted.
+
+Known limit of the check: whether PMD counts a call as recursion depends on types it
+resolves. When the script cannot tell, because of a same-arity overload, an inherited
+method, or a call on another object, it accepts either result.
