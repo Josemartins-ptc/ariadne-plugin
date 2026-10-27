@@ -142,8 +142,9 @@ A file leaves the record only when:
 - it is restored to the saved copy, or deleted;
 - you change `.ariadne.toml` so it passes (higher limit, exemption, exclusion).
 
-A commit does not clear it, and neither does a new session. To drop all debt by hand,
-delete the `debt/` folder (see [Where Ariadne keeps its files](#where-ariadne-keeps-its-files)).
+A commit does not clear it, and neither does a new session. To drop all the debt of a
+repository or worktree, use `/ariadne:clear-debt` (see
+[Clearing the debt](#clearing-the-debt-ariadne-debt-clear)).
 
 **Several sessions.** When a session is blocked on a debt file, it claims that file, so
 two sessions do not rewrite it at the same time. Other sessions then see
@@ -251,6 +252,21 @@ checked right after it runs, like a Write. Two exceptions:
 A file that changes while an agent's Bash command runs counts as that agent's, whoever
 changed it.
 
+**Merges, pulls and checkouts.** Code a Bash command brings in from commits that
+existed before it ran, and that the agent did not make, is not the agent's work: a
+`git merge` or `git pull` (the other branch's commits), a `git checkout` or `git switch` of another branch, a `git reset` to
+another commit, a `git rebase` onto another branch, and a merge or cherry-pick stopped by
+a conflict. A file that ends up exactly as in one of those commits is not checked, and in
+any other file a function that is the same as in one of them is not checked either, right
+after the command and at the end of the turn. So that code never becomes debt. What the
+agent writes on top, including how it resolves a conflict, is checked as usual.
+
+The same holds for a merge, pull or checkout you run yourself, in your own terminal,
+between two prompts of a turn that did not finish (you pressed Esc, so the next prompt
+carries on from where the turn started). A commit you make yourself in between, a merge
+commit included, may hold the agent's unfinished work, so what it adds is still checked
+as the agent's; what a merge brings in from the other branch is not.
+
 ## A folder with several repositories
 
 If you start Claude Code in a folder that is not a git repository but contains some,
@@ -292,6 +308,35 @@ is shared by every folder, so only the sessions and debt that name a file in the
 current folder are shown; a session that has not yet touched a file there is not.
 It only reads: no lock is taken, nothing is pruned, nothing is written.
 
+## Clearing the debt: `ariadne debt clear`
+
+`/ariadne:clear-debt` in Claude Code first shows what is recorded and asks you to
+confirm:
+
+```
+Complexity debt recorded here (files left over the limits):
+  a.go
+  b/c.go
+
+Clearing it removes these files from the record, and the saved copies they are judged against.
+Ariadne then judges them like any other file: only the code a turn changes.
+This cannot be undone.
+```
+
+Only if you answer yes does it clear the debt, and it prints one line such as
+`Cleared the complexity debt of 2 files.`
+
+From the command line, `ariadne debt clear --dry-run` prints the same list and writes
+nothing; `ariadne debt clear` clears without asking.
+
+- In a git repository it removes the whole debt record and its saved copies. A linked
+  worktree has its own record, so clearing there leaves the main checkout's alone.
+- Outside git, every folder shares one record, so only the current folder's files are
+  removed from it.
+- Use it when the debt is not the agent's to fix, for example code that came in with a
+  merge before Ariadne told merged code apart (see
+  [Merges, pulls and checkouts](#bash-edits)).
+
 ## Where Ariadne keeps its files
 
 Ariadne's checks never write into your project's files, so there is nothing to add to
@@ -319,8 +364,9 @@ Two related things are not Ariadne's:
   Commit it, and do not git-ignore it: subagents in git worktrees only see the committed
   file (see [Subagents in git worktrees](#subagents-in-git-worktrees)).
 
-To reset Ariadne in a repository (all turn state and all complexity debt), close the
-Claude Code sessions working there and delete `.git/ariadne/`.
+To clear only the complexity debt, use `/ariadne:clear-debt`. To reset Ariadne in a
+repository (all turn state and all complexity debt), close the Claude Code sessions
+working there and delete `.git/ariadne/`.
 
 ## Known limits
 
@@ -335,6 +381,16 @@ Claude Code sessions working there and delete `.git/ariadne/`.
   Write and Edit there are checked.
 - A file renamed with Bash (`git mv a.go b.go`) is checked as a new file, so every
   function in it over the limits blocks.
+- Files you edit yourself between two prompts of an unfinished turn, without committing,
+  are checked as the agent's.
+- The agent's own commits are the ones a Bash command made while it ran, told by their
+  commit date. So a commit dated in the past on purpose passes as someone else's code,
+  and so does a commit the agent made without moving `HEAD` in the checked folder (in
+  another worktree, or with git's low-level commands). A cherry-pick or a `git merge
+  --squash` that completes without a conflict makes a new commit, so the code it brings
+  in is checked as the agent's. So is old code brought back without moving `HEAD`
+  (`git revert`, `git restore --source=<branch>`, `git checkout <branch> -- <file>`), and
+  a function both branches changed that git merges without a conflict.
 - Files outside the session's repository that the agent edits with Write or Edit are
   checked against that repository's last commit, so your own uncommitted changes there
   can count against the agent.

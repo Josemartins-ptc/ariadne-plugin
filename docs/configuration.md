@@ -595,6 +595,7 @@ A ready-made TypeScript config is in
 ariadne check [--format human|json|html] [--changed-since <REF>] [PATHS]...
 ariadne explain <FILE | FILE:LINE | FILE:FUNCTION>
 ariadne status
+ariadne debt clear [--dry-run]
 ariadne --version
 ```
 
@@ -616,6 +617,11 @@ Exit codes of `check`: `0` all within limits, `1` at least one function over a l
 `ariadne status` shows what the hooks last recorded in the current folder: the checks
 still blocking, the rounds used, the subagents running and the complexity debt. It
 writes nothing.
+
+`ariadne debt clear` removes the complexity debt recorded for the current repository or
+worktree: the record and the saved copies its files are judged against. Outside git it
+removes only the current folder's files from the shared record. With `--dry-run` it
+lists the files and writes nothing. It cannot be undone.
 
 To set a project up, use `/ariadne:init` in Claude Code. Setting projects up from a
 script without Claude is described in [init.md](init.md#under-the-hood-for-scripts).

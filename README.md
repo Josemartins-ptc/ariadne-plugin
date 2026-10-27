@@ -80,6 +80,7 @@ exclude_extra = ["public/vendor/**", "scripts/legacy/**"]
 | `/ariadne:init` | Sets Ariadne up for the project and writes `.ariadne.toml` |
 | `/ariadne:report [path] [--changed-since REF]`, or "make an Ariadne report", "what is over the limits?" | Writes an HTML report of every function's scores and opens it |
 | `/ariadne:status` | Shows what Ariadne last recorded here: the checks still blocking, the rounds used, the subagents running and the complexity debt files |
+| `/ariadne:clear-debt` | Shows the complexity debt files, asks you to confirm, then removes the debt (it cannot be undone) |
 
 While the plugin is enabled, Claude can also run `ariadne check <path>` and
 `ariadne explain <file>:<function>` itself.
@@ -156,6 +157,10 @@ they trust the folder:
   run `xattr -dr com.apple.quarantine ~/.claude/plugins/cache/ariadne-plugins` and try again.
 - **A change to `.ariadne.toml` seems ignored**: it takes effect from your next message.
   Subagents in git worktrees only see it once it is committed.
+- **Ariadne keeps blocking on files the agent did not write** (for example, code that
+  came in with a merge made with an older Ariadne): those files are complexity debt.
+  `/ariadne:status` lists them; `/ariadne:clear-debt` removes the debt after you confirm
+  (see [docs/how-it-works.md](docs/how-it-works.md#clearing-the-debt-ariadne-debt-clear)).
 - **`lint not run` or `tests not run`**: a tool or the project's dependencies are not
   installed, or the stage is off. The note in the block report says which;
   `/ariadne:status` shows the last state.

@@ -158,7 +158,12 @@ When a turn ends with functions still over the limit, those files go into a debt
 for the repository. From then on, in any session, the agent is held to them: rewriting
 the same complex code is blocked, and every turn checks them again until they pass.
 Committing the code or starting a new session does not clear it. To accept code that
-is over the limit, change `.ariadne.toml` (raise a limit or add an exemption).
+is over the limit, change `.ariadne.toml` (raise a limit or add an exemption). To drop
+debt that is not the agent's to fix, use `/ariadne:clear-debt`: it lists the files and
+asks you to confirm first.
+
+Code a Bash command brings in from commits the agent did not make (a merge, a pull, a
+checkout, a rebase) is not checked as the agent's work, so it does not become debt.
 
 Related notes:
 
