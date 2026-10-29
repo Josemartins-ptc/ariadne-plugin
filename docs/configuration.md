@@ -615,8 +615,9 @@ Exit codes of `check`: `0` all within limits, `1` at least one function over a l
 `2` a configuration, usage or read error.
 
 `ariadne status` shows what the hooks last recorded in the current folder: the checks
-still blocking, the rounds used, the subagents running and the complexity debt. It
-writes nothing.
+still blocking, the rounds used, the subagents running, how many times each session was
+flagged (edits and Stop blocks, subagents included) and the complexity debt. It writes
+nothing.
 
 `ariadne debt clear` removes the complexity debt recorded for the current repository or
 worktree: the record and the saved copies its files are judged against. Outside git it

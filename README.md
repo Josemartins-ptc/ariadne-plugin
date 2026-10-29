@@ -79,7 +79,7 @@ exclude_extra = ["public/vendor/**", "scripts/legacy/**"]
 |---|---|
 | `/ariadne:init` | Sets Ariadne up for the project and writes `.ariadne.toml` |
 | `/ariadne:report [path] [--changed-since REF]`, or "make an Ariadne report", "what is over the limits?" | Writes an HTML report of every function's scores and opens it |
-| `/ariadne:status` | Shows what Ariadne last recorded here: the checks still blocking, the rounds used, the subagents running and the complexity debt files |
+| `/ariadne:status` | Shows what Ariadne last recorded here: the checks still blocking, the rounds used, the subagents running, how many times the session was flagged and the complexity debt files |
 | `/ariadne:clear-debt` | Shows the complexity debt files, asks you to confirm, then removes the debt (it cannot be undone) |
 
 While the plugin is enabled, Claude can also run `ariadne check <path>` and

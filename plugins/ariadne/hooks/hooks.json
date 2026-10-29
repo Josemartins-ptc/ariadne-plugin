@@ -51,6 +51,14 @@
         ]
       }
     ],
+    "SessionEnd": [
+      {
+        "matcher": "clear",
+        "hooks": [
+          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/bin/ariadne\" hook session-end" }
+        ]
+      }
+    ],
     "SubagentStop": [
       {
         "hooks": [

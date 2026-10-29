@@ -286,6 +286,7 @@ Ariadne session 4f1c…
   Blocking:
     complexity ✗ 1 function over the limits — main.go:5 run
   Subagents running: 1 (a1)
+  Flagged this session: 4 edits, 3 Stop blocks (lint 1, complexity 2)
 
 Complexity debt (files left over the limits):
   old/legacy.go (being fixed by session 4f1c…)
@@ -298,11 +299,25 @@ Complexity debt (files left over the limits):
 - **Subagents running:** the agent ids of the session's subagent runs whose entry
   changed within the last 24 hours. `No turn in progress.` means the main conversation's
   last turn ended while those runs go on.
+- **Flagged this session:** how many times Ariadne flagged the session's work since it
+  started, its subagents included and across every turn. Edits are the Write, Edit or
+  Bash calls a function over the limits blocked right after they ran; Stop blocks are
+  the stops (the main conversation's and each subagent's) that sent the agent back to
+  work, followed by how many of them each failing check (lint, complexity, tests) took
+  part in, so the stages can add up to more than the blocks. `nothing` means nothing
+  was flagged. `/clear` starts a new session and clears the old session at once: its
+  count, and a turn it left unfinished (stopped with Esc). Its subagents stay listed
+  until they stop, or for 24 hours, since one may still be running in the background.
+  Exiting keeps everything, so a resumed session carries on. A count left 24 hours
+  without a new flag is also cleared, at the next prompt in the repository (outside git,
+  in any folder): that cleans up after sessions that were never resumed.
 - **Complexity debt:** the debt files still on disk, with the session whose claim says it
   is fixing one.
 
-With several sessions, each is listed, newest first (by when its state was last saved).
-A turn that passed its stop leaves no state, so a quiet repository prints
+With several sessions, each is listed, newest first (by when its state or its count was
+last saved).
+A turn that passed its stop leaves no state, but a session that was flagged stays listed,
+with `No turn in progress.`, until its count is cleared; a quiet repository prints
 `No Ariadne session has run here yet.` (or only its debt). Outside git, the folder store
 is shared by every folder, so only the sessions and debt that name a file in the
 current folder are shown; a session that has not yet touched a file there is not.

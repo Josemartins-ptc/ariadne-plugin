@@ -1,5 +1,5 @@
 ---
-description: Show what Ariadne's hooks last recorded here - the checks still blocking, the rounds used, the subagents running and the complexity debt files.
+description: Show what Ariadne's hooks last recorded here - the checks still blocking, the rounds used, the subagents running, how many times the session was flagged and the complexity debt files.
 allowed-tools: Bash(CLAUDE_PLUGIN_DATA="${CLAUDE_PLUGIN_DATA}" "${CLAUDE_PLUGIN_ROOT}/bin/ariadne" status)
 ---
 
